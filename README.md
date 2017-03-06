@@ -7,7 +7,11 @@ The inspiration for this was taken from this [collection of page transitions](ht
 
 ##Animation
 
+1-angular-animation
+
 ###Simple CSS Animation
+
+1-css-anim
 
 Using `:hover` and the transition property. [Samples](http://james-star.com/answers/en/css3-hover-effect-transitions-transformations-and-animations/). A [nice introduction](https://robots.thoughtbot.com/transitions-and-transforms) to the css transition and transform properties.
 
@@ -83,9 +87,11 @@ Alternatively you can use an additional class to bind the animation:
 
 ###Angular CSS Class Animation
 
+1-angular-animation (continued)
+
 Instead of doing a transition on :hover, we create animation by binding transitions to a class, `.rotate`, and create a class for both the "box" and "circle" states of the div. 
 
-This enables us to switch between classes using the ng-class directive built into Angular (part of core ng).
+This enables us to switch between classes using the ng-class (a directive built into Angular core).
 
 ```html
 <script src="https://code.angularjs.org/1.6.2/angular.js"></script>
@@ -132,7 +138,7 @@ angular.module('myApp', [])
 </div>
 ```
 
-Bind the boolean value that is attached to $scope.boxClass to whether or not the element should have the .box or .circle class
+Bind the boolean value that is attached to `$scope.boxClass` to whether or not the element should have the .box or .circle class
 
 Checked (default) - boxClass is true and `box` is inserted into the class statement:
 
@@ -147,6 +153,8 @@ Unchecked:
 ```
 
 ###Angular Animation with ngAnimate
+
+2-angular-ng-anim
 
 When you include `ngAnimate` in your module, there is a change in how Angular handles certain built-in directives - Angular will monitor these directives and add special classes to the element on the firing of certain events. 
 
@@ -281,7 +289,7 @@ console.log( data );
 
 ###Create and Implement Component
 
-Directory 2. Use lite-server
+2-angular-ng-anim. Use lite-server
 
 app.module.js on top level
 
@@ -355,7 +363,9 @@ Finally, in index.html
 * same JS as previous example
 * Same HTML as previous example
 
-CSS3 animations are more complicated than transitions, but have the same implementation on the ngAnimate side. In the CSS we use an @keyframes rule to define our animation. This is the same that as our earlier transition except we use the animation keyword in our CSS and give the animation a name:
+CSS3 animations are more complicated than transitions, but have the same implementation on the ngAnimate side. In the CSS we use an @keyframes rule to define our animation. 
+
+This is the same that as our earlier transition except we use the animation keyword in our CSS and give the animation a name:
 
 ```css
 /*.fade {
@@ -410,7 +420,9 @@ Add transforms:
 }
 ```
 
-Add array.pop method. 
+Add array.pop method.
+
+The pop() method pulls the last element off of the given array and returns it.
 
 Not:
 
@@ -423,6 +435,7 @@ But:
 ```html
     <button ng-click="$ctrl.bottomToTop()">Move Bottom Item to Top</button>
 ```
+
 Not:
 ```js
 $scope.bottomToTop = function() {
@@ -437,7 +450,7 @@ self.bottomToTop = function() {
 };
 ```
 
-The pop() method pulls the last element off of the given array and returns it. Unshift adds new items to the beginning of an array.
+Unshift adds new items to the beginning of an array.
 
 
 ###JavaScript animation (uses jQuery)
@@ -488,6 +501,8 @@ Basically, what happens here is that Angular will register your animation functi
 
 ##Angular Animation and Routing
 
+4-angular-ng-route
+
 The sample application.
 
 While the example may seem - at the surface - to be of limited use, this form of animation is important for modern interface design - especially on devices such as phones.
@@ -499,9 +514,9 @@ Declare the app on the html tag:
 <html ng-app="pagesApp">
 <head>
 	<title>Class Review</title>
-	<script src="https://code.angularjs.org/1.5.8/angular.js"></script>       
-	<script src="https://code.angularjs.org/1.5.8/angular-route.js"></script>
-	<script src="https://code.angularjs.org/1.5.8/angular-animate.js"></script>
+	<script src="https://code.angularjs.org/1.6.2/angular.js"></script>       
+	<script src="https://code.angularjs.org/1.6.2/angular-route.js"></script>
+	<script src="https://code.angularjs.org/1.6.2/angular-animate.js"></script>
 
 	...
 ```
