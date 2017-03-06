@@ -1,4 +1,4 @@
-#MEAN Session Seven
+#MEAN Session Six B
 
 http://daniel.deverell.com/mean-fall-2016/ng-animate-sample/#/
 
@@ -103,9 +103,8 @@ This enables us to switch between classes using the ng-class directive built int
 .circle {
 	background: #9351a6;
 	border-radius: 50%;
-	margin: 20px auto;
-	width: 150px;
-	height: 150px;
+	width: 20vw;
+    height: 20vh;
 	transform: rotate(360deg);
 }
 .rotate {
@@ -126,7 +125,7 @@ angular.module('myApp', [])
 
 
 ```html
-<div ng-app="myApp" ng-controller="MainCtrl">
+<div class="container" ng-app="myApp" ng-controller="MainCtrl">
 	<input type="checkbox" ng-model="boxClass">
 	<div class="rotate" ng-class="{'box': boxClass, 'circle': !boxClass}">
 	</div>
@@ -282,6 +281,8 @@ console.log( data );
 
 ###Create and Implement Component
 
+Directory 2. Use lite-server
+
 app.module.js on top level
 
 `angular.module('myApp', ['manageList', 'ngAnimate']);`
@@ -290,7 +291,7 @@ manage-list.module.js in a new manage-list directory
 
 `angular.module('manageList', []);`
 
-manage-list.template.html
+`manage-list.template.html`:
 
 ```html
 <h1>Pirate Day</h1>
@@ -441,6 +442,8 @@ The pop() method pulls the last element off of the given array and returns it. U
 
 ###JavaScript animation (uses jQuery)
 
+3-angular-jq-anim
+
 Note - this is included for reference only.
 
 Since modern browsers have sufficient support for css animations it is no longer necessary to perform js animations in most cases, but if you need to support browsers that do not support CSS transitions, then you can register a JavaScript animation with Angular.
@@ -484,6 +487,8 @@ Basically, what happens here is that Angular will register your animation functi
 
 
 ##Angular Animation and Routing
+
+The sample application.
 
 While the example may seem - at the surface - to be of limited use, this form of animation is important for modern interface design - especially on devices such as phones.
 
