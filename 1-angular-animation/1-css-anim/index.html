@@ -3,15 +3,44 @@
 
 <head>
 	<title>Animation</title>
+	<script src="https://code.angularjs.org/1.6.2/angular.js"></script>
 	<style>
-
+		.container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 100vh;
+		}
+		.box {
+			background: #5FCF80;
+			width: 20vw;
+			height: 20vh;
+		}
+		.circle {
+			background: #9351a6;
+			border-radius: 50%;
+			width: 20vw;
+			height: 20vh;
+			transform: rotate(360deg);
+		}
+		.rotate {
+			transition: all 2s linear;
+		}
 	</style>
 </head>
 
 <body>
-	<div class="container">
-		<div class="box"></div>
+	<div class="container" ng-app="myApp" ng-controller="MainCtrl">
+		<input type="checkbox" ng-model="boxClass">
+		<div class="rotate" ng-class="{'box': boxClass, 'circle': !boxClass}">
+		</div>
 	</div>
+	<script>
+		angular.module('myApp', [])
+		.controller('MainCtrl', function($scope){
+			$scope.boxClass = true;
+		});
+	</script>
 </body>
 
 </html>
