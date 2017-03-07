@@ -481,7 +481,7 @@ Declare the app on the html tag:
 	...
 ```
 
-Develop the app.js file.
+In app.js:
 
 ```js
 var pagesApp = angular.module('pagesApp', [
@@ -558,9 +558,11 @@ var pagesApp = angular.module('pagesApp', [
 ]);
 ```
 
-Test using `python -m SimpleHTTPServer 9006` in the browser.
+Test using `lite-server` in the browser.
 
-Recall - [ngAnimate](http://docs.angularjs.org/api/ngAnimate) - adds and removes CSS classes to different Angular directives based on if they are entering or leaving the view. For example, when we load up a site, whatever is populated in ng-view gets a .ng-enter class.
+Recall - [ngAnimate](http://docs.angularjs.org/api/ngAnimate) - adds and removes CSS classes to different Angular directives based on if they are entering or leaving the view. 
+
+For example, when we load up a site, whatever is populated in ng-view gets a .ng-enter class.
 
 ngAnimate Works On: ngRepeat, ngInclude, ngIf, ngSwitch, ngShow, ngHide, ngView, and ngClass
 
@@ -646,6 +648,8 @@ First we chain the `.page` class to use leave and enter events:
     to { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
 }
 ```
+
+For a good primer on this type of animation see [CSS Tricks](https://css-tricks.com/almanac/properties/a/animation/)
 
 
 ##Visualisation
@@ -774,7 +778,7 @@ Take the data from data.js and add it to the controller:
 		];
 	});
 ```
-Add the bar data to the view:
+Add the bar data to the view (after `<div class="x">{{xAxis}}</div>`):
 
 ```html
 <div ng-repeat="bar in data" class="bar" style="height:{{bar.value}}px; width:{{width / data.length - 8 }}px; left:{{$index / data.length * width }}px">
@@ -805,7 +809,7 @@ Add display for this to the css
 }
 ```
 
-Add the array processor for `$scope.max`
+Adjust the bar heights vis a vis the max. Add the array processor for `$scope.max` to the end of the controller:
 
 ```js
 	var app = angular.module('graphApp', []);
