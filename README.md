@@ -358,6 +358,39 @@ Finally, in index.html
 </div>
 ```
 
+
+
+ALTERNATE
+
+
+```
+var myApp = angular.module('myApp', ['ngAnimate']);
+
+myApp.component('manageList', {
+
+    templateUrl: 'js/manage-list.template.html',
+
+    controller: function ItemCtrl() {
+
+        this.items = [
+        { name: "Vessel" },
+        { name: "Booty" },
+        { name: "Loot" },
+        { name: "Pipe" },
+        { name: "Treasure" },
+        { name: "Arrgh" }
+        ];
+
+        this.removeItem = index => this.items.splice(index, 1);
+
+        this.addItem = () => {
+            this.items.push(this.item);
+            this.item = {};
+        }
+    }
+});
+```
+
 ###Angular CSS Animation
 
 * same JS as previous example
@@ -418,6 +451,12 @@ Add transforms:
     transform: translateX(-200px);
   }
 }
+```
+
+`<li ng-repeat="item in $ctrl.items" class="fade" ng-class="{ even: $even, odd: $odd }" >`
+
+```
+.odd {background: red;}
 ```
 
 Add array.pop method.
