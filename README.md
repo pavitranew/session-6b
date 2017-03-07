@@ -1,4 +1,4 @@
-#MEAN Session Six B
+#MEAN Session Six-B
 
 http://daniel.deverell.com/mean-fall-2016/ng-animate-sample/#/
 
@@ -33,7 +33,6 @@ Using `:hover` and the transition property. [Samples](http://james-star.com/answ
             width: 20vw;
             height: 20vh;
             transition: all 2s ease-in-out;
-            cursor: pointer;
         }
 
         .box:hover {
@@ -53,39 +52,7 @@ Using `:hover` and the transition property. [Samples](http://james-star.com/answ
 </html>
 ```
 
-Alternatively you can use an additional class to bind the animation:
-
-```
-	.box {
-		background: #5FCF80;
-		width: 20vw;
-        height: 20vh;
-	}
-	.box:hover {
-		transform: rotate(360deg);
-		background: #9351A6;
-		border-radius: 50%;
-	}
-	.rotate {
-		transition: all 2s ease-in-out;
-	}
-	.rotate:hover {
-		transition: all 1s ease-in-out;
-	}
-</style>
-</head>
-
-<body>
-
-	<div class="container">
-		<div class="box rotate"></div>
-	</div>
-
-</body>
-
-```
-
-###Angular CSS Class Animation
+###Angular CSS + ngClass Animation
 
 1-angular-animation (continued)
 
@@ -104,7 +71,10 @@ This enables us to switch between classes using the ng-class (a directive built 
 
 ```css
 .box {
-	...
+	background: #5FCF80;
+	width: 20vw;
+	height: 20vh;
+	/*transition: all 2s ease-in-out;*/
 }
 .circle {
 	background: #9351a6;
@@ -144,7 +114,7 @@ Checked (default) - boxClass is true and `box` is inserted into the class statem
 <div class="box rotate" ng-class="{'box': boxClass, 'circle': !boxClass} "></div>
 ```
 
-Unchecked:
+Unchecked - boxClass is not true therefore circle is used:
 
 ```html
 <div class="rotate circle" ng-class="{'box': boxClass, 'circle': !boxClass} "></div>
@@ -156,7 +126,7 @@ Unchecked:
 
 When you include `ngAnimate` in your module, there is a change in how Angular handles certain built-in directives - Angular will monitor these directives and add special classes to the element on the firing of certain events. 
 
-For example, when you add, move, or remove an item from an array which is being used by the ngRepeat directive, Angular will catch that event and add a series of classes to the element in the ngRepeat.
+When you add, move, or remove an item from an array which is being used by the ngRepeat directive, Angular will catch that event and add a series of classes to the element in the ngRepeat.
 
 These CSS classes take the form of ng-{EVENT} and ng-{EVENT}-active for structural events like enter, move, or leave. But, for class-based animations, it takes the form of {CLASS}-add, {CLASS}-add-active, {CLASS}-remove, and {CLASS}-remove-active. 
 
@@ -164,7 +134,9 @@ Here's [documentation with a table](https://docs.angularjs.org/api/ngAnimate) th
 ￼
 Angular will automatically detect that CSS is attached to an animation when the animation is triggered, and add the .ng-{EVENT}-active class until the animation has run its course. It will then remove that class, and any other added classes, from the DOM.
 
-Build an example of using CSS3 transitions to animate a ngRepeat directive:
+Build an example of using CSS3 transitions to animate a ngRepeat directive.
+
+app.js:
 
 ```js
 angular.module('myApp', ['ngAnimate']).
@@ -210,7 +182,9 @@ angular.module('myApp', ['ngAnimate']).
 	});
 ```
 
-The splice() array method adds/removes items to/from an array, and returns the removed item(s). `index` is the position to remove and `1` is the number of items.
+Test by clicking on an X.
+
+Here, splice() is an array method that removes items from an array. `index` is the position in the array to remove and `1` is the number of items.
 
 $index captures the iteration of the ng-repeat you’re. Here we send it to our function in the controller where it is used for splice().
 
@@ -329,15 +303,17 @@ Finally, in index.html
 	<manage-list></manage-list>
 </div>
 ```
+Note: this needs to run via http. Be sure to use lite-server.
+
 
 ###Angular CSS Animation
 
 * same JS as previous example
-* Same HTML as previous example
+* Same HTML as previous example 
 
-CSS3 animations are more complicated than transitions, but have the same implementation on the ngAnimate side. In the CSS we use an @keyframes rule to define our animation. 
+This is the same that as our earlier transition except we use the animation keyword in our CSS, give the animation a name, and use @keyframes rule to define our animation.
 
-This is the same that as our earlier transition except we use the animation keyword in our CSS and give the animation a name:
+CSS3 animations are more complicated than transitions, but have the same implementation on the ngAnimate side. 
 
 ```css
 /*.fade {
@@ -392,7 +368,7 @@ Add transforms:
 }
 ```
 
-Note: only use keyframes for more complex animation effects:
+Note: use keyframes for more complex animation effects:
 
 ```
 @keyframes disappear {
@@ -418,9 +394,7 @@ Note: only use keyframes for more complex animation effects:
 .odd {background: #bada55;}
 ```
 
-Add array.pop method.
-
-The pop() method pulls the last element off of the given array and returns it.
+Adding additional functions to the controller
 
 Add:
 
@@ -428,15 +402,15 @@ Add:
     <button ng-click="$ctrl.bottomToTop()">Move Bottom Item to Top</button>
 ```
 
-Add:
+unshift - adds new items to the beginning of an array.
+
+array.pop method: the pop() method pulls the last element off of the given array.
 
 ```
 this.bottomToTop = function() {
 	this.items.unshift(this.items.pop());
 };
 ```
-
-Unshift adds new items to the beginning of an array.
 
 
 ###JavaScript animation (uses jQuery)
