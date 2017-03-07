@@ -120,8 +120,6 @@ This enables us to switch between classes using the ng-class (a directive built 
 
 Note: you can change the class in the inspector to see the animation.
 
-We are animating the margin as well here.
-
 ```js
 angular.module('myApp', [])
 .controller('MainCtrl', function($scope){
@@ -162,24 +160,11 @@ For example, when you add, move, or remove an item from an array which is being 
 
 These CSS classes take the form of ng-{EVENT} and ng-{EVENT}-active for structural events like enter, move, or leave. But, for class-based animations, it takes the form of {CLASS}-add, {CLASS}-add-active, {CLASS}-remove, and {CLASS}-remove-active. 
 
-Here's [documentation with a table](https://docs.angularjs.org/api/ngAnimate) that illustrate some of the built-in directives, the events that fire, and classes that are temporarily added when you add ngAnimate to your project.
+Here's [documentation with a table](https://docs.angularjs.org/api/ngAnimate) that illustrates some of the built-in directives, the events that fire, and classes that are temporarily added when you add ngAnimate to your project.
 ￼
 Angular will automatically detect that CSS is attached to an animation when the animation is triggered, and add the .ng-{EVENT}-active class until the animation has run its course. It will then remove that class, and any other added classes, from the DOM.
 
 Build an example of using CSS3 transitions to animate a ngRepeat directive:
-
-```html
-<div>
-	<h1>Pirate Day</h1>
-	<ul>
-		<li class="fade">
-			{{ item.name }}
-			<span>X</span>
-		</li>
-	</ul>
-</div>
-```
-
 
 ```js
 angular.module('myApp', ['ngAnimate']).
@@ -273,7 +258,7 @@ $scope.addItem = function() {
   };
 ```
 
-Push() appends elements to the end of the given array. When push() takes multiple arguments they are appended in a left-to-right order.
+Push() appends elements to the end of the given array. When push() takes multiple arguments they are appended in a left-to-right order:
 
 ```js
 var data = [ "X" ];
@@ -291,77 +276,7 @@ console.log( data );
 
 2-angular-ng-anim. Use lite-server
 
-app.module.js on top level
-
-`angular.module('myApp', ['manageList', 'ngAnimate']);`
-
-manage-list.module.js in a new manage-list directory
-
-`angular.module('manageList', []);`
-
-`manage-list.template.html`:
-
-```html
-<h1>Pirate Day</h1>
-<ul>
-	<li ng-repeat="item in $ctrl.items" class="fade">
-		{{ item.name }}
-		<span ng-click="$ctrl.removeItem($index)">X</span>
-	</li>
-</ul>
-
-<input type="text" ng-model="$ctrl.item.name" />
-<button ng-click="$ctrl.addItem()">Add Item</button>
-```
-
-`manage-list.component.js`
-
-```js
-angular.module('myApp').component('manageList', {
-
-	templateUrl: 'manage-list/manage-list.template.html',
-
-	controller: function ItemCtrl() {
-
-		var self = this;
-		self.items = [
-			{ name: "Vessel" },
-			{ name: "Booty" },
-			{ name: "Loot" },
-			{ name: "Pipe" },
-			{ name: "Treasure" },
-			{ name: "Arrgh" }
-		];
-		self.removeItem = function (index) {
-			self.items.splice(index, 1);
-		}
-		self.addItem = function () {
-			self.items.push(self.item);
-			self.item = {};
-		}
-	}
-});
-```
-
-Finally, in index.html
-
-```
-
-<script src="app.module.js"></script>
-<script src="manage-list/manage-list.module.js"></script>
-<script src="manage-list/manage-list.component.js"></script>
-
-...
-
-<div ng-app="myApp">
-	<manage-list></manage-list>
-</div>
-```
-
-
-
-ALTERNATE
-
+In app.js:
 
 ```
 var myApp = angular.module('myApp', ['ngAnimate']);
@@ -389,6 +304,30 @@ myApp.component('manageList', {
         }
     }
 });
+```
+
+manage-list.template.html:
+
+```
+<h1>Pirate Day</h1>
+<ul>
+  <li ng-repeat="item in $ctrl.items" class="fade">
+    {{ item.name }}
+    <span ng-click="$ctrl.removeItem($index)">X</span>
+  </li>
+</ul>
+
+<input type="text" ng-model="$ctrl.item.name" />
+<button ng-click="$ctrl.addItem()">Add Item</button>
+```
+
+Finally, in index.html
+
+```
+
+<div ng-app="myApp">
+	<manage-list></manage-list>
+</div>
 ```
 
 ###Angular CSS Animation
@@ -453,39 +392,47 @@ Add transforms:
 }
 ```
 
+Note: only use keyframes for more complex animation effects:
+
+```
+@keyframes disappear {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        font-size: 2rem;
+    }
+	75% {
+		color: green;
+	}
+    100% {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+}
+```
+
 `<li ng-repeat="item in $ctrl.items" class="fade" ng-class="{ even: $even, odd: $odd }" >`
 
 ```
-.odd {background: red;}
+.odd {background: #bada55;}
 ```
 
 Add array.pop method.
 
 The pop() method pulls the last element off of the given array and returns it.
 
-Not:
-
-```html
-    <button ng-click="bottomToTop()">Move Bottom Item to Top</button>
-```
-
-But:
+Add:
 
 ```html
     <button ng-click="$ctrl.bottomToTop()">Move Bottom Item to Top</button>
 ```
 
-Not:
-```js
-$scope.bottomToTop = function() {
-  $scope.items.unshift($scope.items.pop());
-};
-```
+Add:
 
-But:
-```js
-self.bottomToTop = function() {
-	self.items.unshift(self.items.pop());
+```
+this.bottomToTop = function() {
+	this.items.unshift(this.items.pop());
 };
 ```
 
@@ -590,7 +537,7 @@ Link it:
 
 `<script src="js/app.js"></script>`
 
-Develop the controllers
+Develop controllers.js :
 
 ```js
 var pageControllers = angular.module('pageControllers', []);
@@ -627,7 +574,7 @@ Add the page class directive and examine the HTML in inspector
 ```
 
 
-Inject ngAnimate into the module
+Inject pageControlers into the module
 
 ```js
 var pagesApp = angular.module('pagesApp', [
@@ -908,18 +855,10 @@ Use it to calculate the max height of the columns in css:
 style="height:{{bar.value / max * height }}px; width:{{width / data.length - 8 }}px; left:{{$index / data.length * width }}px"
 ```
 
-##Homework
-
-Add an animated page transition to either the materials (Brooklyn Eats) from session 6 - or - your own single page application.
-
 
 ##Reading
 
 [Documentation](https://docs.angularjs.org/api/ngAnimate) for Angular Animation.
-
-Dickey - Write Modern Web Apps with the MEAN Stack: Mongo, Express, AngularJS and Node.js, chapter 1-7. Please attempt to implement his sample app on your computer. Here's his [Github repo with sample code](https://github.com/dickeyxxx/mean-sample). Be sure to look at the branches (they correspond to chapter numbers) and don't forget to run `sudo npm install` when running the sample code.
-
-If you are interested in svg and visualisation try running through [this exercise](https://css-tricks.com/handmade-svg-bar-chart-featuring-svg-positioning-gotchas/) using svg for developing bar charts.
 
 
 
